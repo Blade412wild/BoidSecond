@@ -16,8 +16,9 @@ public class BoidForwardMovement : MonoBehaviour
     private void Update()
     {
         CheckIfCrossedBoundry();
-        Vector2 dir = Converter.ToVector2(transform.up).normalized;
-        screenPos += (dir * speed) * Time.deltaTime;
+        Vector2 dir = transform.up;
+        Vector2 velocity = (dir * speed) * Time.deltaTime;
+        screenPos += velocity;
         TargetPos = Camera.main.ScreenToWorldPoint(screenPos);
         transform.position = TargetPos;
     }
