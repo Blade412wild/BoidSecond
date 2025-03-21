@@ -8,17 +8,15 @@ public class FlockingManager : MonoBehaviour
     [SerializeField] private bool randomGeneration;
     [SerializeField] private int amountBoids;
 
+
     [Space]
-    [SerializeField] private bool UpdatePosition;
+    [Header("UpdateMethod")]
+    [SerializeField] private bool updatePosition;
+    [SerializeField] private bool updateWhenPress;
+    [SerializeField] private bool updatePerPress;
+
+    [Space]
     [SerializeField] private bool showFullVelocity;
-
-    [Header("Cohesion")]
-    [SerializeField] private bool showMiddlePointVelocity;
-
-    [Header("Allignment")]
-    [SerializeField] private bool showAllignmentVelocity;
-
-
 
     [Header("Refs")]
     [SerializeField] private List<FlockBehaviourBase> ruleList;
@@ -26,6 +24,8 @@ public class FlockingManager : MonoBehaviour
     [SerializeField] private Boid boidPrefab;
 
     private int counter = 0;
+    private bool mayUpdate = true;
+
     private void Start()
     {
         if (randomGeneration)
@@ -39,15 +39,39 @@ public class FlockingManager : MonoBehaviour
 
     private void Update()
     {
-        if (!UpdatePosition) return;
-        CalculateNewPosition();
+        //if (!mayUpdate) return;
+
+        if (updatePerPress)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CalculateNewPosition();
+            }
+        }
+        else if (updateWhenPress)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                CalculateNewPosition();
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                CalculateNewPosition();
+            }
+        }
+        else if (updatePosition)
+        {
+            CalculateNewPosition();
+        }
+
     }
 
     private void CalculateNewPosition()
     {
         foreach (Boid boid in boids)
         {
-            Vector3 newVelocity = boid.Velocity;
+            Vector2 newVelocity = boid.Velocity;
             foreach (FlockBehaviourBase rule in ruleList)
             {
                 newVelocity += rule.CalculateVelocity(boid, boids);
@@ -57,8 +81,8 @@ public class FlockingManager : MonoBehaviour
             //direction.eulerAngles = new Vector3(0, 0, boid.Velocity.normalized.y);
 
             boid.Velocity = (newVelocity * Time.deltaTime);
-            Vector3 velocity3D = new Vector3(boid.Velocity.x, boid.Velocity.y, 0);
-            boid.transform.position += velocity3D;
+            //Vector3 velocity3D = new Vector3(boid.Velocity.x, boid.Velocity.y, 0);
+            boid.transform.position += boid.Velocity;
 
             ScreenBoundry.CheckIfCrossedBoundry(boid);
 

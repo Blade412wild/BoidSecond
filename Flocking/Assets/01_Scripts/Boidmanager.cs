@@ -57,26 +57,26 @@ public class Boidmanager : MonoBehaviour
     private void CheckIfCrossedBoundry(Boid boid)
     {
         Vector2 mirrorPos = Vector2.zero;
-        if (boid.ScreenPos.x > Screen.width)
+        if (boid.ScreenSpacePos.x > Screen.width)
         {
-            mirrorPos = new Vector2(0, boid.ScreenPos.y);
-            boid.ScreenPos = mirrorPos;
+            mirrorPos = new Vector2(0, boid.ScreenSpacePos.y);
+            boid.ScreenSpacePos = mirrorPos;
         }
-        else if (boid.ScreenPos.x < 0)
+        else if (boid.ScreenSpacePos.x < 0)
         {
-            mirrorPos = new Vector2(Screen.width, boid.ScreenPos.y);
-            boid.ScreenPos = mirrorPos;
+            mirrorPos = new Vector2(Screen.width, boid.ScreenSpacePos.y);
+            boid.ScreenSpacePos = mirrorPos;
         }
 
-        if (boid.ScreenPos.y > Screen.height)
+        if (boid.ScreenSpacePos.y > Screen.height)
         {
-            mirrorPos = new Vector2(boid.ScreenPos.x, 0);
-            boid.ScreenPos = mirrorPos;
+            mirrorPos = new Vector2(boid.ScreenSpacePos.x, 0);
+            boid.ScreenSpacePos = mirrorPos;
         }
-        else if (boid.ScreenPos.y < 0)
+        else if (boid.ScreenSpacePos.y < 0)
         {
-            mirrorPos = new Vector2(boid.ScreenPos.x, Screen.height);
-            boid.ScreenPos = mirrorPos;
+            mirrorPos = new Vector2(boid.ScreenSpacePos.x, Screen.height);
+            boid.ScreenSpacePos = mirrorPos;
         }
 
     }

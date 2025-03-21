@@ -2,7 +2,8 @@
 
 public class Boid : MonoBehaviour
 {
-    public Vector3 ScreenPos;
+    public Vector2 ScreenSpacePos;
+    public Vector2 WorldSpacePos;
     public Vector3 forwardDir;
     public Vector3 Velocity;
     public float Speed;
@@ -11,7 +12,8 @@ public class Boid : MonoBehaviour
     {
         Speed = speed;
         Velocity = transform.up;
-        ScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+        ScreenSpacePos = Camera.main.WorldToScreenPoint(transform.position);
+        WorldSpacePos = transform.position;
 
     }
 

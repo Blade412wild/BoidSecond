@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class RuleMoveForward : FlockBehaviourBase
 {
-    public override Vector3 CalculateVelocity(Boid boid, List<Boid> otherBoids)
+    
+    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids)
     {
+        boid.Speed = Scalar;
         Vector2 direction = boid.transform.up.normalized;
         Vector2 velocity = direction * boid.Speed;
         //TargetPos = Camera.main.ScreenToWorldPoint(screenPos);
