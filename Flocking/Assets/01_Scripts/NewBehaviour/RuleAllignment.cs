@@ -4,7 +4,7 @@ using UnityEngine;
 public class RuleAllignment : FlockBehaviourBase
 {
 
-    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids)
+    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids, FlockManager flockManager)
     {
         velocity = Vector2.zero;
         Vector3 perceivedVelocity = Vector3.zero;

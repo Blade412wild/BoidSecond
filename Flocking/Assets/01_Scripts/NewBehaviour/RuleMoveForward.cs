@@ -4,7 +4,7 @@ using UnityEngine;
 public class RuleMoveForward : FlockBehaviourBase
 {
     
-    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids)
+    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids, FlockManager flockManager)
     {
         boid.Speed = Scalar;
         Vector2 direction = boid.transform.up.normalized;

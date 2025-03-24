@@ -4,7 +4,7 @@ using UnityEngine;
 public class RuleSeperation : FlockBehaviourBase
 {
     public float MinDistance;
-    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids)
+    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids, FlockManager flockManager)
     {
         velocity = Vector2.zero;
         foreach (Boid otherBoid in otherBoids)
@@ -14,15 +14,6 @@ public class RuleSeperation : FlockBehaviourBase
             //Debug.Log(distance);
             if (distance < MinDistance)
             {
-                if (boid.Id == 0)
-                {
-                    Debug.Log(boid.name);
-                }
-
-                if (boid.Id == otherBoids.Count - 1)
-                {
-                    Debug.Log(boid.name);
-                }
                 velocity += boid.WorldSpacePos - otherBoid.WorldSpacePos;
                 if (boid.ShowDebugs == true)
                 {
@@ -30,11 +21,6 @@ public class RuleSeperation : FlockBehaviourBase
                 }
             }
         }
-
-        // bereken het middelepunt van de boids die dichtbij zijn en repel tegen dat punt
-        // maar dan gaan ze waarschijnlijk in elkaar
-
-        // ze moeten niet in elkaar gaan
 
         velocity = velocity * Scalar;
 

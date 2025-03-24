@@ -11,7 +11,7 @@ public abstract class FlockBehaviourBase : MonoBehaviour
     protected Vector2 velocity;
 
 
-    public virtual Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoid)
+    public virtual Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoid, FlockManager flockManager)
     {
         return Vector2.zero;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class RuleCohesion : FlockBehaviourBase
 {
     private Vector2 middlePoint;
-    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids)
+    public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids, FlockManager flockManager)
     {
         middlePoint = Vector2.zero;
 

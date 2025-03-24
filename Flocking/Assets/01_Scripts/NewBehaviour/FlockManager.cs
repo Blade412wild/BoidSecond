@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
-public class FlockingManager : MonoBehaviour
+public class FlockManager : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private bool randomGeneration;
@@ -21,9 +21,10 @@ public class FlockingManager : MonoBehaviour
     [SerializeField] private bool DontUpdatePos;
 
     [Header("Refs")]
-    [SerializeField] private List<FlockBehaviourBase> ruleList;
-    [SerializeField] private List<Boid> boids;
+    [field: SerializeField] public List<Boid> boids { get; private set; }
+    [field: SerializeField] public TrailManager trailManager;
     [SerializeField] private Boid boidPrefab;
+    [SerializeField] private List<FlockBehaviourBase> ruleList;
 
 
     private int counter = 0;
@@ -31,7 +32,7 @@ public class FlockingManager : MonoBehaviour
 
     private void Start()
     {
-        if (randomGeneration)
+        if (randomGeneration || boids.Count == 0)
         {
             GenerateRandomBoids();
         }
@@ -80,7 +81,7 @@ public class FlockingManager : MonoBehaviour
             Vector2 newVelocity = Vector2.zero;
             foreach (FlockBehaviourBase rule in ruleList)
             {
-                newVelocity += rule.CalculateVelocity(boid, boids);
+                newVelocity += rule.CalculateVelocity(boid, boids, this);
             }
 
             boid.Velocity = (newVelocity * Time.deltaTime);
@@ -175,28 +176,5 @@ public class FlockingManager : MonoBehaviour
     }
 }
 
-public class SmoothRotateTowards
-{
-    public float smoothTime = 1;
-
-    public Vector3 newRotation;
-
-    private float xVelocity;
-    private float yVelocity;
-    private float zVelocity;
-
-    public Vector3 GetNewRotation(Vector3 direction)
-    {
-        Vector3 targetRotation = Quaternion.LookRotation(direction).eulerAngles;
-
-        newRotation = new Vector3(
-            Mathf.SmoothDampAngle(newRotation.x, targetRotation.x, ref xVelocity, smoothTime),
-            Mathf.SmoothDampAngle(newRotation.y, targetRotation.y, ref yVelocity, smoothTime),
-            Mathf.SmoothDampAngle(newRotation.z, targetRotation.z, ref zVelocity, smoothTime)
-            );
-
-        return newRotation;
-    }
-}
 
 
