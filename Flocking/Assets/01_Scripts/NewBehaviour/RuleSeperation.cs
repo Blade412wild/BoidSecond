@@ -27,8 +27,6 @@ public class RuleSeperation : FlockBehaviourBase
                 if (boid.ShowDebugs == true)
                 {
                     base.DebugVelocityPos(boid, otherBoid.WorldSpacePos);
-                    Debug.Log("boid : " + boid.transform.name + " -> boid : " + otherBoid.transform.name + " : " + distance);
-                    Debug.Log("velocity : " + velocity);
                 }
             }
         }

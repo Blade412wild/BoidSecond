@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ac222a782c06a49b090d716b673556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Scalar>k__BackingField: 1.5
+  <Scalar>k__BackingField: 0.19
   <ShowVelocity>k__BackingField: 0
   <DebugColor>k__BackingField: {r: 1, g: 0.93320835, b: 0, a: 1}
 --- !u!114 &141197859
@@ -421,14 +421,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomGeneration: 1
   amountBoids: 20
-  updatePosition: 1
+  updatePosition: 0
   updateWhenPress: 0
-  updatePerPress: 0
+  updatePerPress: 1
   showFullVelocity: 1
   DontUpdatePos: 0
   ruleList:
   - {fileID: 141197858}
   - {fileID: 141197857}
+  - {fileID: 141197861}
   boids:
   - {fileID: 8950374216568678783}
   - {fileID: 1667233603}

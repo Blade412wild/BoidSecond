@@ -83,11 +83,19 @@ public class FlockingManager : MonoBehaviour
                 newVelocity += rule.CalculateVelocity(boid, boids);
             }
 
+            boid.Velocity = (newVelocity * Time.deltaTime);
+
             //Quaternion direction = Quaternion.identity;
             //direction.eulerAngles = new Vector3(0, 0, boid.Velocity.normalized.y);
 
-            boid.Velocity = (newVelocity * Time.deltaTime);
-            //Vector3 velocity3D = new Vector3(boid.Velocity.x, boid.Velocity.y, 0);
+
+            //Quaternion targetRotation = Quaternion.LookRotation(boid.Velocity.normalized, Vector3.up);
+            //Vector3 targetRotation = Quaternion.LookRotation(direction).eulerAngles;
+
+            float angle = Mathf.Atan2(boid.Velocity.y, boid.Velocity.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90f);
+            boid.transform.rotation = targetRotation;
+
             if (boid.ShowDebugs)
             {
                 DebugVelocity(boid, boid.Velocity);
@@ -100,7 +108,6 @@ public class FlockingManager : MonoBehaviour
 
             ScreenBoundry.CheckIfCrossedBoundry(boid);
 
-            counter++;
         }
     }
 
@@ -165,6 +172,30 @@ public class FlockingManager : MonoBehaviour
     {
         if (boid.ShowDebugs != true) return;
         Debug.DrawRay(boid.transform.position, targetVelocity, Color.green);
+    }
+}
+
+public class SmoothRotateTowards
+{
+    public float smoothTime = 1;
+
+    public Vector3 newRotation;
+
+    private float xVelocity;
+    private float yVelocity;
+    private float zVelocity;
+
+    public Vector3 GetNewRotation(Vector3 direction)
+    {
+        Vector3 targetRotation = Quaternion.LookRotation(direction).eulerAngles;
+
+        newRotation = new Vector3(
+            Mathf.SmoothDampAngle(newRotation.x, targetRotation.x, ref xVelocity, smoothTime),
+            Mathf.SmoothDampAngle(newRotation.y, targetRotation.y, ref yVelocity, smoothTime),
+            Mathf.SmoothDampAngle(newRotation.z, targetRotation.z, ref zVelocity, smoothTime)
+            );
+
+        return newRotation;
     }
 }
 
