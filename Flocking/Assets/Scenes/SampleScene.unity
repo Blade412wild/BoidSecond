@@ -151,11 +151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &98764997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,9 +373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00c4843710a67b44a8cb31e23e4a42b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Scalar>k__BackingField: 0
+  <Scalar>k__BackingField: 3.74
   <ShowVelocity>k__BackingField: 0
   <DebugColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  MinDistance: 1
 --- !u!114 &141197858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Scalar>k__BackingField: 1.5
-  <ShowVelocity>k__BackingField: 1
+  <ShowVelocity>k__BackingField: 0
   <DebugColor>k__BackingField: {r: 1, g: 0.93320835, b: 0, a: 1}
 --- !u!114 &141197859
 MonoBehaviour:
@@ -416,15 +419,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58066023b70ffac4c9cfeb3155b23c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomGeneration: 0
-  amountBoids: 10
+  randomGeneration: 1
+  amountBoids: 20
   updatePosition: 1
   updateWhenPress: 0
   updatePerPress: 0
-  showFullVelocity: 0
+  showFullVelocity: 1
+  DontUpdatePos: 0
   ruleList:
   - {fileID: 141197858}
-  - {fileID: 141197861}
+  - {fileID: 141197857}
   boids:
   - {fileID: 8950374216568678783}
   - {fileID: 1667233603}
@@ -706,11 +710,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &559544520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,11 +928,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &721566479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1152,6 +1160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boid (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8723689128659482716, guid: e80b25cc9fcf0e345874ff044f2d2ef6, type: 3}
+      propertyPath: <ShowDebugs>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1236,11 +1248,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &1289798390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1368,11 +1382,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &1331594432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1500,11 +1516,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &1363696052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1632,11 +1650,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &1548272462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1837,11 +1857,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &1722304201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1969,11 +1991,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a6882b8dae1cf43aa3b322a155f31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <ShowDebugs>k__BackingField: 0
   ScreenSpacePos: {x: 0, y: 0}
   WorldSpacePos: {x: 0, y: 0}
   forwardDir: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Speed: 0
+  Id: 0
 --- !u!114 &1830350658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2177,6 +2201,10 @@ PrefabInstance:
     - target: {fileID: 6999569521228633726, guid: e80b25cc9fcf0e345874ff044f2d2ef6, type: 3}
       propertyPath: m_Name
       value: Boid
+      objectReference: {fileID: 0}
+    - target: {fileID: 8723689128659482716, guid: e80b25cc9fcf0e345874ff044f2d2ef6, type: 3}
+      propertyPath: <ShowDebugs>k__BackingField
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

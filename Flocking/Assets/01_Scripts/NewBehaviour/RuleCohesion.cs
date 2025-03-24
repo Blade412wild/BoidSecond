@@ -28,15 +28,10 @@ public class RuleCohesion : FlockBehaviourBase
         middlePoint = Vector2.zero;
         if(ShowVelocity == true)
         {
-            ShowMiddlePoint(boid, percievedMiddlePoint);
+            base.DebugVelocityPos(boid, percievedMiddlePoint);
         }
 
         return velocity;
-    }
-
-    private void ShowMiddlePoint(Boid boid, Vector2 middlePoint)
-    {
-        Debug.DrawRay(boid.transform.position, (middlePoint - boid.WorldSpacePos).normalized, DebugColor);
     }
 }
 

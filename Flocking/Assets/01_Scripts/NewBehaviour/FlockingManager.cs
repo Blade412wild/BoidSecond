@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class FlockingManager : MonoBehaviour
 {
@@ -17,11 +18,13 @@ public class FlockingManager : MonoBehaviour
 
     [Space]
     [SerializeField] private bool showFullVelocity;
+    [SerializeField] private bool DontUpdatePos;
 
     [Header("Refs")]
     [SerializeField] private List<FlockBehaviourBase> ruleList;
     [SerializeField] private List<Boid> boids;
     [SerializeField] private Boid boidPrefab;
+
 
     private int counter = 0;
     private bool mayUpdate = true;
@@ -69,9 +72,12 @@ public class FlockingManager : MonoBehaviour
 
     private void CalculateNewPosition()
     {
-        foreach (Boid boid in boids)
+        for (int i = 0; i < boids.Count; i++)
         {
-            Vector2 newVelocity = boid.Velocity;
+
+            Boid boid = boids[i];
+
+            Vector2 newVelocity = Vector2.zero;
             foreach (FlockBehaviourBase rule in ruleList)
             {
                 newVelocity += rule.CalculateVelocity(boid, boids);
@@ -82,10 +88,19 @@ public class FlockingManager : MonoBehaviour
 
             boid.Velocity = (newVelocity * Time.deltaTime);
             //Vector3 velocity3D = new Vector3(boid.Velocity.x, boid.Velocity.y, 0);
-            boid.transform.position += boid.Velocity;
+            if (boid.ShowDebugs)
+            {
+                DebugVelocity(boid, boid.Velocity);
+            }
+
+            if (DontUpdatePos != true)
+            {
+                boid.transform.position += boid.Velocity;
+            }
 
             ScreenBoundry.CheckIfCrossedBoundry(boid);
 
+            counter++;
         }
     }
 
@@ -105,11 +120,13 @@ public class FlockingManager : MonoBehaviour
 
     private void InitializeBoids()
     {
-        foreach (Boid boid in boids)
+        for (int i = 0; i < boids.Count; i++)
         {
             //float speed = Random.Range(1, 5);
-            boid.Init(1);
+            boids[i].Init(1, i);
+
         }
+
     }
 
     private Vector2 GetRandomPosition(float x, float y, float BorderMarging)
@@ -144,7 +161,11 @@ public class FlockingManager : MonoBehaviour
 
         list.Clear();
     }
-
+    public virtual void DebugVelocity(Boid boid, Vector2 targetVelocity)
+    {
+        if (boid.ShowDebugs != true) return;
+        Debug.DrawRay(boid.transform.position, targetVelocity, Color.green);
+    }
 }
 
 

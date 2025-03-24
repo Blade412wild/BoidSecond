@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class FlockBehaviourBase : MonoBehaviour 
+public abstract class FlockBehaviourBase : MonoBehaviour
 {
     [Header("Settings")]
     [field: SerializeField] public float Scalar { get; protected set; }
@@ -15,4 +15,17 @@ public abstract class FlockBehaviourBase : MonoBehaviour
     {
         return Vector2.zero;
     }
+
+    public virtual void DebugVelocityPos(Boid boid, Vector2 targetPos)
+    {
+        if (boid.ShowDebugs != true) return;
+        Debug.DrawRay(boid.transform.position, (targetPos - boid.WorldSpacePos).normalized, DebugColor);
+    }
+    public virtual void DebugVelocity(Boid boid, Vector2 targetVelocity)
+    {
+        if (boid.ShowDebugs != true) return;
+        Debug.DrawRay(boid.transform.position, targetVelocity, DebugColor);
+    }
+
+
 }
