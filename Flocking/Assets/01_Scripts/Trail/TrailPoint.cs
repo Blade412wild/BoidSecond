@@ -6,7 +6,7 @@ public class TrailPoint : MonoBehaviour
     public Action TrailPointCompleted;
 
     public int Id;
-    [field: SerializeField] public float completionPercentage { get; private set; }
+    [field: SerializeField] public float boidsNeededToSwitch { get; private set; }
     [SerializeField] private Renderer renderer;
 
     private TrailManager trailManager;

@@ -3,13 +3,16 @@
 public class Boid : MonoBehaviour
 {
     [field: SerializeField] public bool ShowDebugs { get; private set; }
-    public Vector2 ScreenSpacePos;
-    public Vector2 WorldSpacePos;
-    public Vector3 forwardDir;
-    public Vector3 Velocity;
-    public float Speed;
-    public int Id;
 
+
+    [HideInInspector] public Vector2 ScreenSpacePos;
+    [HideInInspector] public Vector2 WorldSpacePos;
+    [HideInInspector] public Vector3 forwardDir;
+    [HideInInspector] public Vector3 Velocity;
+    [HideInInspector] public float Speed;
+    [HideInInspector] public int Id;
+    [HideInInspector] public float CurrentAngle;
+    [HideInInspector] public float AngleVelocity;
     public void Init(float speed, int id)
     {
         Speed = speed;

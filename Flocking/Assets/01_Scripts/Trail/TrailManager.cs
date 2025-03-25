@@ -12,14 +12,14 @@ public class TrailManager : MonoBehaviour
     [SerializeField] private int counter;
 
     public TrailPoint activeTrailPoint { get; private set; }
-    private float activePercentage;
+    private float boidsNeededToSwitch;
     private float pointCompletionPercentage;
 
     private void Start()
     {
         InitializeTrailPoints();
         activeTrailPoint = trailPoints[0];
-        activePercentage = activeTrailPoint.completionPercentage;
+        boidsNeededToSwitch = activeTrailPoint.boidsNeededToSwitch;
         activeTrailPoint.ChangeColor(Color.green);
     }
 
@@ -34,8 +34,7 @@ public class TrailManager : MonoBehaviour
     public void OnBoidReachingTrailPoint()
     {
         counter++;
-        pointCompletionPercentage = CalculatePercentage();
-        if (pointCompletionPercentage >= activePercentage)
+        if (counter >= boidsNeededToSwitch)
         {
             ChangeActivePoint();
             counter = 0;
@@ -45,8 +44,9 @@ public class TrailManager : MonoBehaviour
 
     private float CalculatePercentage()
     {
-        //activePercentage
-        return 100.0f;
+        
+        float progression = CalculateNewValueInNewScale(counter, 0, pointCompletionPercentage, 0, 100);
+        return progression;
     }
 
     private void ChangeActivePoint()
@@ -64,7 +64,7 @@ public class TrailManager : MonoBehaviour
         activeTrailPoint.ChangeColor(Color.white);
 
         activeTrailPoint = trailPoints[nextID];
-        activePercentage = activeTrailPoint.completionPercentage;
+        boidsNeededToSwitch = activeTrailPoint.boidsNeededToSwitch;
         activeTrailPoint.ChangeColor(Color.green);
 
     }
@@ -75,6 +75,14 @@ public class TrailManager : MonoBehaviour
         {
             trailPoints[i].Init(this, i);
         }
+    }
+
+    public static float CalculateNewValueInNewScale(float valueOldScale, float oldMin, float oldMax, float newMin, float newMax)
+    {
+        float newValue = (valueOldScale - oldMin) / (oldMax - oldMin) * (newMax - newMin) + newMin;
+
+
+        return newValue;
     }
 
 }

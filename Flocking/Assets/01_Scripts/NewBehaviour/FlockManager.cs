@@ -8,6 +8,7 @@ public class FlockManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private bool randomGeneration;
     [SerializeField] private int amountBoids;
+    [SerializeField] private float rotateSpeed;
 
 
     [Space]
@@ -21,7 +22,13 @@ public class FlockManager : MonoBehaviour
     [SerializeField] private bool DontUpdatePos;
 
     [Header("Refs")]
-    [field: SerializeField] public List<Boid> boids { get; private set; }
+
+#if UNITY_EDITOR
+    [field: SerializeField]
+#else
+[HideInInspector]
+#endif
+    public List<Boid> boids { get; private set; }
     [field: SerializeField] public TrailManager trailManager;
     [SerializeField] private Boid boidPrefab;
     [SerializeField] private List<FlockBehaviourBase> ruleList;
@@ -86,16 +93,16 @@ public class FlockManager : MonoBehaviour
 
             boid.Velocity = (newVelocity * Time.deltaTime);
 
-            //Quaternion direction = Quaternion.identity;
-            //direction.eulerAngles = new Vector3(0, 0, boid.Velocity.normalized.y);
-
-
-            //Quaternion targetRotation = Quaternion.LookRotation(boid.Velocity.normalized, Vector3.up);
-            //Vector3 targetRotation = Quaternion.LookRotation(direction).eulerAngles;
-
-            float angle = Mathf.Atan2(boid.Velocity.y, boid.Velocity.x) * Mathf.Rad2Deg;
-            Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90f);
+            float targetAngle = Mathf.Atan2(boid.Velocity.y, boid.Velocity.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle - 90f);
             boid.transform.rotation = targetRotation;
+
+            //boid.CurrentAngle = Mathf.SmoothDampAngle(boid.CurrentAngle, targetAngle, ref boid.AngleVelocity, rotateSpeed * Time.deltaTime);
+            //boid.transform.rotation = Quaternion.Euler(0, 0, boid.CurrentAngle);
+
+            //boid.CurrentAngle = boid.transform.rotation.eulerAngles.z;
+            //float newAngle = Mathf.SmoothDampAngle(boid.CurrentAngle, targetAngle, ref boid.AngleVelocity, rotateSpeed * Time.deltaTime);
+            //boid.transform.rotation = Quaternion.Euler(0, 0, newAngle);
 
             if (boid.ShowDebugs)
             {
