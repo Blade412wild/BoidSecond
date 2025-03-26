@@ -93,9 +93,9 @@ public class FlockManager : MonoBehaviour
 
             boid.Velocity = (newVelocity * Time.deltaTime);
 
-            float targetAngle = Mathf.Atan2(boid.Velocity.y, boid.Velocity.x) * Mathf.Rad2Deg;
-            Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle - 90f);
-            boid.transform.rotation = targetRotation;
+            //float targetAngle = Mathf.Atan2(boid.Velocity.y, boid.Velocity.x) * Mathf.Rad2Deg;
+            //Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle - 90f);
+            //boid.transform.rotation = targetRotation;
 
             //boid.CurrentAngle = Mathf.SmoothDampAngle(boid.CurrentAngle, targetAngle, ref boid.AngleVelocity, rotateSpeed * Time.deltaTime);
             //boid.transform.rotation = Quaternion.Euler(0, 0, boid.CurrentAngle);
