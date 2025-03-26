@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6812439926928409014}
   - component: {fileID: 5449258002315231243}
+  - component: {fileID: 6642088139086644948}
   m_Layer: 0
   m_Name: Boid
   m_TagString: Untagged
@@ -56,6 +57,44 @@ MonoBehaviour:
   CurrentAngle: 0
   AngleVelocity: 0
   angleRef: 0
+  RotationIterationCounter: 0
+--- !u!70 &6642088139086644948
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4602617308343847779}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.1012983}
+  m_Size: {x: 0.5, y: 0.7974034}
+  m_Direction: 0
 --- !u!1001 &985482603977989640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,7 +148,8 @@ PrefabInstance:
       value: BoidArt
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 963070272035819553, guid: e80b25cc9fcf0e345874ff044f2d2ef6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e80b25cc9fcf0e345874ff044f2d2ef6, type: 3}

@@ -28,11 +28,12 @@ public class TrailManager : MonoBehaviour
         if (BoidCollided == true)
         {
             BoidCollided = false;
-            OnBoidReachingTrailPoint();
+            OnBoidReachingTrailPoint(activeTrailPoint);
         }
     }
-    public void OnBoidReachingTrailPoint()
+    public void OnBoidReachingTrailPoint(TrailPoint trailPoint)
     {
+        if (trailPoint != activeTrailPoint) return;
         counter++;
         if (counter >= boidsNeededToSwitch)
         {

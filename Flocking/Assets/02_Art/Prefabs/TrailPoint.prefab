@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 427930397708978584}
   - component: {fileID: 9153945930553644447}
   - component: {fileID: 5992341194556453030}
+  - component: {fileID: 6838932420665178746}
   m_Layer: 0
   m_Name: TrailPoint
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: 0
-  <completionPercentage>k__BackingField: 4
+  <boidsNeededToSwitch>k__BackingField: 0
   renderer: {fileID: 6072935069555459202}
 --- !u!58 &5992341194556453030
 CircleCollider2D:
@@ -79,12 +80,39 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 2.41
+--- !u!50 &6838932420665178746
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694217171723486970}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 7
 --- !u!1 &8988060825780589173
 GameObject:
   m_ObjectHideFlags: 0

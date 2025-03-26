@@ -15,7 +15,7 @@ public class TrailPoint : MonoBehaviour
     {
         Id = id;
         trailManager = manager;
-        
+
     }
 
     public void ChangeColor(Color color)
@@ -23,12 +23,18 @@ public class TrailPoint : MonoBehaviour
         renderer.material.color = color;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        trailManager.OnBoidReachingTrailPoint();
+        Debug.Log(other);
+
+        if (other.TryGetComponent(out Boid boid))
+        { 
+            trailManager.OnBoidReachingTrailPoint(this);
+        }
+
     }
 
-    
+
 }
 
 
