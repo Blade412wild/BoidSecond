@@ -307,9 +307,10 @@ MonoBehaviour:
   <DebugColor>k__BackingField: {r: 0.61913776, g: 0, b: 1, a: 1}
   useSmoothRotation: 0
   useNormalRotation: 1
-  rotationSpeed: 0.1
   updateRotationAfterIteration: 0
-  angleThreshold: 10
+  angleThreshold: 1
+  minRotationSpeed: 1
+  maxRotationSpeed: 10
 --- !u!114 &141197861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,6 +860,8 @@ MonoBehaviour:
   updateDirection: 0
   smoothTime: 1
   maxTurnSpeed: 90
+  minRotationSpeed: 1
+  maxRotationSpeed: 10
 --- !u!4 &674363160
 Transform:
   m_ObjectHideFlags: 0
