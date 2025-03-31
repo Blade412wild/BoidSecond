@@ -7,9 +7,13 @@ public class RuleAllignment : FlockBehaviourBase
     [SerializeField] bool useSmoothRotation;
     [SerializeField] bool useNormalRotation;
 
-    [SerializeField] private float rotationSpeed = 0.1f;
     [SerializeField] private int updateRotationAfterIteration = 0;
+    [SerializeField] private float angleThreshold;
+
+    [SerializeField] private float minRotationSpeed = 1f;  // Speed when angle is small
+    [SerializeField] private float maxRotationSpeed = 10f; // Speed when angle is large
     private int iterationCounter = 0;
+
     public override Vector2 CalculateVelocity(Boid boid, List<Boid> otherBoids, FlockManager flockManager)
     {
         velocity = Vector2.zero;
@@ -25,55 +29,82 @@ public class RuleAllignment : FlockBehaviourBase
 
         Vector2 percieved = perceivedVelocity / (otherBoids.Count - 1);
         velocity = percieved * Scalar;
-        if (boid.RotationIterationCounter >= updateRotationAfterIteration)
-        {
-            //SmoothRotation(boid, velocity);
-            if (useNormalRotation)
-            {
-                NormalRotation(boid);
-            }
-            else if (useSmoothRotation)
-            {
-                SmoothRotation(boid, velocity);
-            }
-
-            boid.RotationIterationCounter = 0;
-        }
+        HandleRotation(boid);
 
 
+        //if (boid.RotationIterationCounter >= updateRotationAfterIteration)
+        //{
+        //    //SmoothRotation(boid, velocity);
+        //    if (useNormalRotation)
+        //    {
+        //        NormalRotation(boid);
+        //    }
+        //    else if (useSmoothRotation)
+        //    {
+        //        smoothRotation3(boid, velocity);
+        //    }
 
-        //NormalRotation(boid);
+        //    boid.RotationIterationCounter = 0;
+        //}
+
+
+
         boid.RotationIterationCounter++;
         return velocity;
     }
 
-    private void SmoothRotation(Boid boid, Vector2 velocity)
-    {
-        float targetAngle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle - 90f);
-
-        float angle = Mathf.SmoothDampAngle(boid.transform.eulerAngles.z, targetAngle, ref boid.angleRef, rotationSpeed);
-
-        boid.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
-        //boid.transform.rotation = targetRotation;
-    }
-
-    private void NormalRotationArt(Boid boid)
+    private void HandleRotation(Boid boid)
     {
         float targetAngle = Mathf.Atan2(boid.Velocity.y, boid.Velocity.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle - 90f);
-        boid.Art.rotation = targetRotation;
+        float currentAngle = transform.eulerAngles.z;
+
+        float angleDifference = Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle));
+        float dynamicSpeed = Mathf.Lerp(minRotationSpeed, maxRotationSpeed, angleDifference / 180f);
+
+        if (angleDifference > angleThreshold || boid.RotationIterationCounter > iterationCounter)
+        {
+            float newAngle = Mathf.SmoothDampAngle(currentAngle, targetAngle, ref boid.angleRef, 1f / dynamicSpeed);
+            transform.rotation = Quaternion.Euler(0, 0, newAngle);
+        }
+    }
+
+    void smoothRotation3(Boid boid, Vector2 vector)
+    {
+
+        float targetAngle = Mathf.Atan2(boid.Velocity.y, boid.Velocity.x) * Mathf.Rad2Deg;
+        float currentAngle = transform.eulerAngles.z;
+
+        // Calculate shortest angle difference
+        float angleDifference = Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle));
+
+        // Dynamic rotation speed (scale between min and max)
+        float dynamicSpeed = Mathf.Lerp(minRotationSpeed, maxRotationSpeed, angleDifference / 180f);
+
+        // Rotate only if the difference is significant
+        if (angleDifference > angleThreshold)
+        {
+            float newAngle = Mathf.SmoothDampAngle(currentAngle, targetAngle, ref boid.angleRef, 1f / dynamicSpeed);
+            transform.rotation = Quaternion.Euler(0, 0, newAngle);
+        }
     }
 
     private void NormalRotation(Boid boid)
     {
         float targetAngle = Mathf.Atan2(boid.Velocity.y, boid.Velocity.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle - 90f);
-        boid.transform.rotation = targetRotation;
+        float shortestAngle = Mathf.DeltaAngle(boid.transform.rotation.z, targetAngle);
+
+        if (shortestAngle > (angleThreshold * -1) && shortestAngle < angleThreshold)
+        {
+            Debug.Log("to small angle");
+        }
+        else
+        {
+            Debug.Log("bigger angle");
+            boid.transform.rotation = targetRotation;
+        }
+
     }
-
-
 }
 
 

@@ -62,11 +62,11 @@ public class TrailManager : MonoBehaviour
             nextID = activeTrailPoint.Id + 1;
         }
 
-        activeTrailPoint.ChangeColor(Color.white);
+        activeTrailPoint.DeactivatePoint();
 
         activeTrailPoint = trailPoints[nextID];
         boidsNeededToSwitch = activeTrailPoint.boidsNeededToSwitch;
-        activeTrailPoint.ChangeColor(Color.green);
+        activeTrailPoint.ActivatePoint();
 
     }
 

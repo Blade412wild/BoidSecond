@@ -9,6 +9,9 @@ public class FlockManager : MonoBehaviour
     [SerializeField] private bool randomGeneration;
     [SerializeField] private int amountBoids;
     [SerializeField] private float rotateSpeed;
+    [SerializeField] private int frameRate = 60;
+    [SerializeField] private bool updateFrameRate;
+
 
 
     [Space]
@@ -74,6 +77,12 @@ public class FlockManager : MonoBehaviour
         else if (updatePosition)
         {
             CalculateNewPosition();
+        }
+
+        if (updateFrameRate)
+        {
+            CalculateNewPosition();//Application.targetFrameRate = frameRate; // Limit FPS to 30
+            updateFrameRate = false;
         }
 
     }

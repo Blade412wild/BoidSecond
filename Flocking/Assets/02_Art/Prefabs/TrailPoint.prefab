@@ -50,6 +50,7 @@ MonoBehaviour:
   Id: 0
   <boidsNeededToSwitch>k__BackingField: 0
   renderer: {fileID: 6072935069555459202}
+  collider: {fileID: 5992341194556453030}
 --- !u!58 &5992341194556453030
 CircleCollider2D:
   m_ObjectHideFlags: 0
