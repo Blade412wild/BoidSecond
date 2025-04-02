@@ -41,8 +41,8 @@ public class RuleAllignment2 : FlockBehaviourBase
     private void HandleRotation(Boid boid)
     {
         //followMouse(boid);
-        adaptiveRotationSpeedFollowMouse(boid);
-
+        //AdaptiveRotationSpeedFollowMouse(boid);
+        AdaptiveRotationToVelocity(boid);
         //Vector2 futurePos = boid.transform.position + boid.Velocity;
         //Vector2 direction = boid.WorldSpacePos - futurePos;
 
@@ -119,11 +119,34 @@ public class RuleAllignment2 : FlockBehaviourBase
         boid.transform.eulerAngles = new Vector3(0, 0, boid.CurrentAngle);
     }
 
-    void adaptiveRotationSpeedFollowMouse(Boid boid)
+    void AdaptiveRotationSpeedFollowMouse(Boid boid)
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Vector3 direction = mousePosition - boid.transform.position;
+
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        float targetAngle2 = Vector2.SignedAngle(Vector2.right, direction);
+        Debug.Log("atan : " + targetAngle + " | signedAngle : " + targetAngle2);
+
+        // Calculate shortest angle difference
+        float angleDifference = Mathf.Abs(Mathf.DeltaAngle(boid.CurrentAngle, targetAngle));
+
+        // Dynamic rotation speed (scale between min and max)
+        float dynamicSpeed = Mathf.Lerp(minRotationSpeed, maxRotationSpeed, angleDifference / 180f);
+
+        // Rotate only if the difference is significant
+        if (angleDifference > 1f)
+        {
+            boid.CurrentAngle = Mathf.SmoothDampAngle(boid.CurrentAngle, targetAngle, ref boid.angleRef, 1f / dynamicSpeed);
+            boid.transform.rotation = Quaternion.Euler(0, 0, boid.CurrentAngle);
+        }
+    }
+    void AdaptiveRotationToVelocity(Boid boid)
+    {
+        Vector3 futurePos = boid.transform.position + boid.Velocity;
+
+        Vector3 direction = futurePos - boid.transform.position;
 
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float targetAngle2 = Vector2.SignedAngle(Vector2.right, direction);
