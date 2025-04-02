@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomGeneration: 1
-  amountBoids: 20
+  amountBoids: 50
   rotateSpeed: 15
   frameRate: 60
   updateFrameRate: 0
@@ -391,8 +391,8 @@ MonoBehaviour:
   useNormalRotation: 1
   updateRotationAfterIteration: 0
   angleThreshold: 0
-  minRotationSpeed: 1
-  maxRotationSpeed: 10
+  minRotationSpeed: 30
+  maxRotationSpeed: 40
   smoothTime: 1
   maxTurnSpeed: 90
 --- !u!114 &172014926 stripped
