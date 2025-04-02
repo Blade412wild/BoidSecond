@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 141197857}
   - component: {fileID: 141197861}
   - component: {fileID: 141197863}
+  - component: {fileID: 141197864}
   m_Layer: 0
   m_Name: Flocking Manager
   m_TagString: Untagged
@@ -350,13 +351,11 @@ MonoBehaviour:
   DontUpdatePos: 0
   <boids>k__BackingField: []
   trailManager: {fileID: 1043199051}
-  boidPrefab: {fileID: 5449258002315231243, guid: f95061332f4a5784ab74204c1b77d88a, type: 3}
+  boidPrefab: {fileID: 5449258002315231243, guid: 10d6775388f97d4419d001cded6691fb, type: 3}
   ruleList:
-  - {fileID: 141197859}
-  - {fileID: 141197858}
-  - {fileID: 141197857}
+  - {fileID: 141197864}
   - {fileID: 141197861}
-  - {fileID: 141197863}
+  - {fileID: 141197857}
 --- !u!114 &141197863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +371,29 @@ MonoBehaviour:
   <Scalar>k__BackingField: 1
   <ShowVelocity>k__BackingField: 0
   <DebugColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &141197864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141197854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c392230753b9204a964827655c9ecdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Scalar>k__BackingField: 10.35
+  <ShowVelocity>k__BackingField: 0
+  <DebugColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  useSmoothRotation: 0
+  useNormalRotation: 1
+  updateRotationAfterIteration: 0
+  angleThreshold: 0
+  minRotationSpeed: 1
+  maxRotationSpeed: 10
+  smoothTime: 1
+  maxTurnSpeed: 90
 --- !u!114 &172014926 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9153945930553644447, guid: ba67bad868186b241a72e96cac347736, type: 3}
@@ -857,7 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {fileID: 110730245}
-  updateDirection: 0
+  updateDirection: 1
   smoothTime: 1
   maxTurnSpeed: 90
   minRotationSpeed: 1

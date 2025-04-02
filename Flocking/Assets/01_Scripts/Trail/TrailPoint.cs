@@ -38,7 +38,7 @@ public class TrailPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
+        //Debug.Log(other);
 
         if (other.TryGetComponent(out Boid boid))
         { 

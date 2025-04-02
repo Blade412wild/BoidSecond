@@ -5,10 +5,10 @@ public class ForwardTest : MonoBehaviour
     [SerializeField] private Transform targetPos;
     [SerializeField] private bool updateDirection;
     [SerializeField] private float smoothTime;
+    [SerializeField] private float maxTurnSpeed = 90;
     private float zVel;
     private Vector3 newRotation;
 
-    public float maxTurnSpeed = 90;
     float angle;
     float currentVelocity;
 
@@ -29,23 +29,24 @@ public class ForwardTest : MonoBehaviour
         {
            // CalculateDirection();
             //updateDirection = false;
-            //followMouse();
-            smoothRotation3();
+            followMouse();
+            //smoothRotation3();
         }
     }
 
     private void CalculateDirection()
     {
         Vector3 target = targetPos.position - transform.position;
-        Vector3 rotation = Quaternion.LookRotation(target, Vector3.forward).eulerAngles;
-
+        //Vector3 rotation = Quaternion.LookRotation(target, Vector3.forward).eulerAngles;
+        //followMouse();
+        adaptiveRotationSpeedFollowMouse();
         //newRotation = new Vector3(0, 0, Mathf.SmoothDampAngle(newRotation.y, rotation.y, ref zVel, smoothTime));
         //Quaternion current = transform.localRotation;
 
         //transform.localRotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
         // transform.eulerAngles = newRotation;
         //.forward = dir;
-        transform.LookAt(targetPos.position, Vector3.right);
+        //transform.LookAt(targetPos.position, Vector3.right);
 
     }
 
@@ -60,7 +61,7 @@ public class ForwardTest : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 0, angle);
     }
 
-    void smoothRotation3()
+    void adaptiveRotationSpeedFollowMouse()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

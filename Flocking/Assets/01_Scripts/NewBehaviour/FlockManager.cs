@@ -42,7 +42,7 @@ public class FlockManager : MonoBehaviour
 
     private void Start()
     {
-        if (randomGeneration || boids.Count == 0)
+        if (randomGeneration)
         {
             GenerateRandomBoids();
         }
@@ -54,7 +54,7 @@ public class FlockManager : MonoBehaviour
     private void Update()
     {
         //if (!mayUpdate) return;
-
+        if (boids.Count == 0) return;
         if (updatePerPress)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -148,6 +148,10 @@ public class FlockManager : MonoBehaviour
         {
             //float speed = Random.Range(1, 5);
             boids[i].Init(1, i);
+            if(i == 0)
+            {
+                boids[i].gameObject.GetComponentInChildren<Renderer>().material.color = Color.red;
+            }
 
         }
 
